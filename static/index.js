@@ -3,6 +3,7 @@ const extra_multiplier = document.getElementById("multiplier");
 const max_multiplier = document.getElementById("max_multiplier");
 const current_score = document.getElementById("current_score");
 const current_multiplier = document.getElementById("current_multiplier");
+const full_reset = document.getElementById("full_reset");
 
 let score = parseInt(getCookieValue("score")) || 0;
 let multiplier = parseInt(getCookieValue("multiplier")) || 1;
@@ -47,6 +48,12 @@ max_multiplier.onclick = function(){
         multiplier *= 2;
         update();
     }
+};
+
+full_reset.onclick = function(){
+    score = 0;
+    multiplier = 0;
+    update();
 };
 
 update();
