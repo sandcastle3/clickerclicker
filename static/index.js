@@ -52,7 +52,7 @@ max_multiplier.onclick = function(){
 
 full_reset.onclick = function(){
     score = 0;
-    multiplier = 0;
+    multiplier = 1;
     update();
 };
 
