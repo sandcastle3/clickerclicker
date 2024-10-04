@@ -37,6 +37,6 @@ button:focus {
     background-color: #f54040;
 }
 
-p {
+h1, p {
     font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
 }

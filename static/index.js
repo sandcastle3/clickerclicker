@@ -1,9 +1,11 @@
 const css = document.getElementById("css");
+const nameplate = document.getElementById("nameplate");
 const extra_score = document.getElementById("score");
 const extra_multiplier = document.getElementById("multiplier");
 const extra_sps = document.getElementById("sps");
 const max_multiplier = document.getElementById("max_multiplier");
 const max_sps = document.getElementById("max_sps");
+const edit_name = document.getElementById("edit_name")
 const current_score = document.getElementById("current_score");
 const current_multiplier = document.getElementById("current_multiplier");
 const current_sps = document.getElementById("current_sps");
@@ -18,12 +20,15 @@ const disable_godmode = document.getElementById("disable_godmode");
 let score = parseInt(getCookieValue("score")) || 0;
 let multiplier = parseInt(getCookieValue("multiplier")) || 1;
 let sps = parseInt(getCookieValue("sps")) || 0;
+let uname = getCookieValue("uname") || "Player";
 let godmodeBuffer = "";
 
 function checkGodmode(event){
     godmodeBuffer += event.key;
     if (godmodeBuffer === "godmode"){
-        godmode_div.hidden = false;
+        if (getCookieValue("uname") === "godmode") {
+            godmode_div.hidden = false;
+        }
         godmodeBuffer = "";
     }
 }
@@ -51,12 +56,19 @@ function update(){
     document.cookie = `score=${score}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `multiplier=${multiplier}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
+    document.cookie = `uname=${uname}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
 
     current_score.innerHTML = `score: ${score}`;
     current_multiplier.innerHTML = `multiplier: x${multiplier}`;
     current_sps.innerHTML = `sps: ${sps}`;
     extra_multiplier.innerHTML = `+1 multiplier (${multiplier_cost} score)`;
     extra_sps.innerHTML = `+1 sps (${sps_cost} score)`;
+    nameplate.innerHTML = `${uname}'s clickerclicker`
+}
+
+edit_name.onclick = function(){
+    uname = prompt("What's your new name", "Player");
+    update();
 }
 
 extra_score.onclick = function(){
@@ -128,6 +140,7 @@ hide_css.onclick = function(){
 
 disable_godmode.onclick = function(){
     godmode_div.hidden = true;
+    godmodeBuffer = "";
 }
 
 setInterval(dosps, 1000);
