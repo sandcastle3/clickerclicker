@@ -1,3 +1,4 @@
+const css = document.getElementById("css");
 const extra_score = document.getElementById("score");
 const extra_multiplier = document.getElementById("multiplier");
 const extra_sps = document.getElementById("sps");
@@ -11,6 +12,7 @@ const godmode_div = document.getElementById("godmode");
 const set_score = document.getElementById("set_score");
 const set_multiplier = document.getElementById("set_multiplier");
 const set_sps = document.getElementById("set_sps");
+const hide_css = document.getElementById("hide_css");
 const disable_godmode = document.getElementById("disable_godmode");
 
 let score = parseInt(getCookieValue("score")) || 0;
@@ -118,6 +120,10 @@ set_multiplier.onclick = function(){
 set_sps.onclick = function(){
     sps = parseInt(prompt("New sps", "0"));
     update();
+}
+
+hide_css.onclick = function(){
+    css.innerHTML = "";
 }
 
 disable_godmode.onclick = function(){
