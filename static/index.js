@@ -11,6 +11,7 @@ const godmode_div = document.getElementById("godmode");
 const set_score = document.getElementById("set_score");
 const set_multiplier = document.getElementById("set_multiplier");
 const set_sps = document.getElementById("set_sps");
+const disable_godmode = document.getElementById("disable_godmode");
 
 let score = parseInt(getCookieValue("score")) || 0;
 let multiplier = parseInt(getCookieValue("multiplier")) || 1;
@@ -117,6 +118,10 @@ set_multiplier.onclick = function(){
 set_sps.onclick = function(){
     sps = parseInt(prompt("New sps", "0"));
     update();
+}
+
+disable_godmode.onclick = function(){
+    godmode_div.hidden = true;
 }
 
 setInterval(dosps, 1000);

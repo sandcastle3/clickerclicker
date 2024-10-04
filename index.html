@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/style.css">
     <title>clickerclicker</title>
 </head>
 <body>
@@ -11,16 +12,16 @@
     <button id="sps">+1 sps (50 score)</button>
     <button id="max_multiplier">max multiplier</button>
     <button id="max_sps">max sps</button>
+    <div hidden id="godmode">
+        <button id="set_score">set score</button>
+        <button id="set_multiplier">set multiplier</button>
+        <button id="set_sps">set sps</button>
+        <button id="disable_godmode">DISABLE GODMODE</button>
+    </div>
     <p id="current_score">score: </p>
     <p id="current_multiplier">multiplier: </p>
     <p id="current_sps">sps: </p>
     <button id="full_reset">FULL RESET</button>
-    <div hidden id="godmode">
-        <hr>
-        <button id="set_score">set score</button>
-        <button id="set_multiplier">set multiplier</button>
-        <button id="set_sps">set sps</button>
-    </div>
     <script src="./static/index.js"></script>
 </body>
 </html>
