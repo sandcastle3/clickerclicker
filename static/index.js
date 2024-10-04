@@ -11,14 +11,12 @@ const full_reset = document.getElementById("full_reset");
 let score = parseInt(getCookieValue("score")) || 0;
 let multiplier = parseInt(getCookieValue("multiplier")) || 1;
 let sps = parseInt(getCookieValue("sps")) || 0;
-let multiplier_cost = 100 * multiplier;
-let sps_cost = 50 * sps;
 
 function getCookieValue(name){
     const cookieArr = document.cookie.split(';');
-    for (let cookie of cookieArr){
+    for (let cookie of cookieArr) {
         const cookiePair = cookie.trim();
-        if (cookiePair.startsWith(name + '=')){
+        if (cookiePair.startsWith(name + '=')) {
             return cookiePair.split('=')[1];
         }
     }
@@ -26,21 +24,23 @@ function getCookieValue(name){
 }
 
 function dosps(){
-    score += sps;
+    score += sps * multiplier;
     update();
 }
 
 function update(){
-    multiplier_cost = 100 * multiplier;
-    sps_cost = 50 * sps;
+    const multiplier_cost = 100 * multiplier;
+    const sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
+
     document.cookie = `score=${score}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `multiplier=${multiplier}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
-    document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`
+    document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
+
     current_score.innerHTML = `score: ${score}`;
     current_multiplier.innerHTML = `multiplier: x${multiplier}`;
-    current_sps.innerHTML = `sps: ${sps}`
-    extra_multiplier.innerHTML = `x2 multiplier (${multiplier_cost} score)`
-    extra_sps.innerHTML = `+1 sps (${sps_cost} score)`
+    current_sps.innerHTML = `sps: ${sps}`;
+    extra_multiplier.innerHTML = `x2 multiplier (${multiplier_cost} score)`;
+    extra_sps.innerHTML = `+1 sps (${sps_cost} score)`;
 }
 
 extra_score.onclick = function(){
@@ -49,6 +49,7 @@ extra_score.onclick = function(){
 };
 
 extra_multiplier.onclick = function(){
+    const multiplier_cost = 100 * multiplier;
     if (score >= multiplier_cost) {
         score -= multiplier_cost;
         multiplier *= 2;
@@ -57,6 +58,7 @@ extra_multiplier.onclick = function(){
 };
 
 extra_sps.onclick = function(){
+    const sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
     if (score >= sps_cost) {
         score -= sps_cost;
         sps += 1;
@@ -65,6 +67,7 @@ extra_sps.onclick = function(){
 };
 
 max_multiplier.onclick = function(){
+    const multiplier_cost = 100 * multiplier;
     while (score >= multiplier_cost) {
         score -= multiplier_cost;
         multiplier *= 2;
@@ -73,6 +76,7 @@ max_multiplier.onclick = function(){
 };
 
 max_sps.onclick = function(){
+    const sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
     while (score >= sps_cost) {
         score -= sps_cost;
         sps += 1;
