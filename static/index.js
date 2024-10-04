@@ -7,10 +7,23 @@ const current_score = document.getElementById("current_score");
 const current_multiplier = document.getElementById("current_multiplier");
 const current_sps = document.getElementById("current_sps");
 const full_reset = document.getElementById("full_reset");
+const godmode_div = document.getElementById("godmode");
+const set_score = document.getElementById("set_score");
+const set_multiplier = document.getElementById("set_multiplier");
+const set_sps = document.getElementById("set_sps");
 
 let score = parseInt(getCookieValue("score")) || 0;
 let multiplier = parseInt(getCookieValue("multiplier")) || 1;
 let sps = parseInt(getCookieValue("sps")) || 0;
+let godmodeBuffer = "";
+
+function checkGodmode(event){
+    godmodeBuffer += event.key;
+    if (godmodeBuffer === "godmode"){
+        godmode_div.hidden = false;
+        godmodeBuffer = "";
+    }
+}
 
 function getCookieValue(name){
     const cookieArr = document.cookie.split(';');
@@ -91,5 +104,21 @@ full_reset.onclick = function(){
     update();
 };
 
+set_score.onclick = function(){
+    score = parseInt(prompt("New score", "0"));
+    update();
+}
+
+set_multiplier.onclick = function(){
+    multiplier = parseInt(prompt("New multiplier", "0"));
+    update();
+}
+
+set_sps.onclick = function(){
+    sps = parseInt(prompt("New sps", "0"));
+    update();
+}
+
 setInterval(dosps, 1000);
+document.addEventListener("keydown", checkGodmode);
 update();
