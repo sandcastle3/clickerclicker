@@ -58,11 +58,11 @@ function update(){
     document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `uname=${uname}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
 
-    current_score.innerHTML = `score: ${score}`;
-    current_multiplier.innerHTML = `multiplier: x${multiplier}`;
-    current_sps.innerHTML = `sps: ${sps}`;
-    extra_multiplier.innerHTML = `+1 multiplier (${multiplier_cost} score)`;
-    extra_sps.innerHTML = `+1 sps (${sps_cost} score)`;
+    current_score.innerHTML = `Score: ${score}`;
+    current_multiplier.innerHTML = `Multiplier: x${multiplier}`;
+    current_sps.innerHTML = `Score / second: ${sps}`;
+    extra_multiplier.innerHTML = `+1 Multiplier (${multiplier_cost} score)`;
+    extra_sps.innerHTML = `+1 Score / second (${sps_cost} score)`;
     nameplate.innerHTML = `${uname}'s clickerclicker`
 }
 
@@ -132,7 +132,7 @@ set_multiplier.onclick = function(){
 }
 
 set_sps.onclick = function(){
-    sps = parseInt(prompt("New sps", "0"));
+    sps = parseInt(prompt("New Score / second", "0"));
     update();
 }
 
