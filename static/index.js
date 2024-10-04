@@ -39,7 +39,7 @@ function update(){
     current_score.innerHTML = `score: ${score}`;
     current_multiplier.innerHTML = `multiplier: x${multiplier}`;
     current_sps.innerHTML = `sps: ${sps}`;
-    extra_multiplier.innerHTML = `x2 multiplier (${multiplier_cost} score)`;
+    extra_multiplier.innerHTML = `+1 multiplier (${multiplier_cost} score)`;
     extra_sps.innerHTML = `+1 sps (${sps_cost} score)`;
 }
 
@@ -52,7 +52,7 @@ extra_multiplier.onclick = function(){
     const multiplier_cost = 100 * multiplier;
     if (score >= multiplier_cost) {
         score -= multiplier_cost;
-        multiplier *= 2;
+        multiplier += 1;
         update();
     }
 };
@@ -70,7 +70,7 @@ max_multiplier.onclick = function(){
     const multiplier_cost = 100 * multiplier;
     while (score >= multiplier_cost) {
         score -= multiplier_cost;
-        multiplier *= 2;
+        multiplier += 1;
         update();
     }
 };
