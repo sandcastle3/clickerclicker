@@ -14,6 +14,7 @@ const godmode_div = document.getElementById("godmode");
 const set_score = document.getElementById("set_score");
 const set_multiplier = document.getElementById("set_multiplier");
 const set_sps = document.getElementById("set_sps");
+const show_css = document.getElementById("show_css");
 const hide_css = document.getElementById("hide_css");
 const disable_godmode = document.getElementById("disable_godmode");
 
@@ -134,6 +135,10 @@ set_multiplier.onclick = function(){
 set_sps.onclick = function(){
     sps = parseInt(prompt("New Score / second", "0"));
     update();
+}
+
+show_css.onclick = function(){
+    css.innerHTML = '<link rel="stylesheet" href="./static/style.css">';
 }
 
 hide_css.onclick = function(){
