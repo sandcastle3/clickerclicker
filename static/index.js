@@ -117,6 +117,7 @@ full_reset.onclick = function(){
     multiplier = 1;
     sps = 0;
     uname = "Player";
+    godmode_div.hidden = true;
     update();
 };
 
