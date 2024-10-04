@@ -116,6 +116,7 @@ full_reset.onclick = function(){
     score = 0;
     multiplier = 1;
     sps = 0;
+    uname = "Player";
     update();
 };
 
