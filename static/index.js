@@ -1,6 +1,7 @@
 const css = document.getElementById("css");
 const nameplate = document.getElementById("nameplate");
-const extra_score = document.getElementById("score");
+const buttons = document.getElementById("buttons");
+let extra_score = document.getElementById("score");
 const extra_multiplier = document.getElementById("multiplier");
 const extra_sps = document.getElementById("sps");
 const max_multiplier = document.getElementById("max_multiplier");
@@ -23,12 +24,22 @@ let multiplier = parseInt(getCookieValue("multiplier")) || 1;
 let sps = parseInt(getCookieValue("sps")) || 0;
 let uname = getCookieValue("uname") || "Player";
 let godmodeBuffer = "";
+let query = new URLSearchParams(new URL(window.location.href).search);
+let hamter = false;
+
+if (query.has("hamter")){
+    hamter = true;
+}
+
+function enableGodmode(){
+    godmode_div.hidden = false;
+}
 
 function checkGodmode(event){
     godmodeBuffer += event.key;
     if (godmodeBuffer === "godmode"){
         if (getCookieValue("uname") === "godmode") {
-            godmode_div.hidden = false;
+            enableGodmode();
         }
         godmodeBuffer = "";
     }
@@ -148,6 +159,20 @@ hide_css.onclick = function(){
 disable_godmode.onclick = function(){
     godmode_div.hidden = true;
     godmodeBuffer = "";
+}
+
+if (hamter){
+    extra_score.hidden = true;
+    extra_score = document.createElement("img");
+    extra_score.src = "./img/hamter1.jpg";
+    extra_score.id = "score";
+    extra_score.height = 225;
+    extra_score.width = 225;
+    extra_score.onclick = function() {
+        score += multiplier;
+        update();
+    };
+    buttons.appendChild(extra_score);
 }
 
 setInterval(dosps, 1000);
