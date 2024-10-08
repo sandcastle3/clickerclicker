@@ -31,6 +31,10 @@ if (query.has("hamter")){
     hamter = true;
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function enableGodmode(){
     godmode_div.hidden = false;
 }
@@ -70,11 +74,11 @@ function update(){
     document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `uname=${uname}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
 
-    current_score.innerHTML = `Score: ${score}`;
-    current_multiplier.innerHTML = `Multiplier: x${multiplier}`;
-    current_sps.innerHTML = `Score / second: ${sps}`;
-    extra_multiplier.innerHTML = `+1 Multiplier (${multiplier_cost} score)`;
-    extra_sps.innerHTML = `+1 Score / second (${sps_cost} score)`;
+    current_score.innerHTML = `Score: ${numberWithCommas(score)}`;
+    current_multiplier.innerHTML = `Multiplier: x${numberWithCommas(multiplier)}`;
+    current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)}`;
+    extra_multiplier.innerHTML = `+1 Multiplier (${numberWithCommas(multiplier_cost)} score)`;
+    extra_sps.innerHTML = `+1 Score / second (${numberWithCommas(sps_cost)} score)`;
     nameplate.innerHTML = `${uname}'s clickerclicker`
 }
 
