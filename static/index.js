@@ -115,8 +115,8 @@ max_multiplier.onclick = function(){
     while (score >= multiplier_cost) {
         score -= multiplier_cost;
         multiplier += 1;
-        update();
     }
+    update();
 };
 
 max_sps.onclick = function(){
@@ -124,8 +124,8 @@ max_sps.onclick = function(){
     while (score >= sps_cost) {
         score -= sps_cost;
         sps += 1;
-        update();
     }
+    update();
 }
 
 full_reset.onclick = function(){
