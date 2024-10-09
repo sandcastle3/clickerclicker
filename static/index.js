@@ -78,7 +78,7 @@ function update(){
     document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `uname=${uname}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
 
-    extra_score.innerHTML = `+${multiplier} Score`;
+    extra_score.innerHTML = `+${numberWithCommas(multiplier)} Score`;
     current_score.innerHTML = `Score: ${numberWithCommas(score)}`;
     current_multiplier.innerHTML = `Multiplier: x${numberWithCommas(multiplier)}`;
     current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)} (${numberWithCommas(sps * multiplier)} w/ Multiplier)`;
