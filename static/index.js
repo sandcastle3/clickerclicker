@@ -10,6 +10,7 @@ const edit_name = document.getElementById("edit_name")
 const current_score = document.getElementById("current_score");
 const current_multiplier = document.getElementById("current_multiplier");
 const current_sps = document.getElementById("current_sps");
+const top_score = document.getElementById("top_score");
 const full_reset = document.getElementById("full_reset");
 const godmode_div = document.getElementById("godmode");
 const set_score = document.getElementById("set_score");
@@ -28,6 +29,7 @@ let query = new URLSearchParams(new URL(window.location.href).search);
 let hamter = false;
 let sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
 let multiplier_cost = 100 * multiplier;
+let xhr = new XMLHttpRequest();
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -35,11 +37,50 @@ if (query.has("hamter")){
     hamter = true;
 }
 
+function checkTopScore() {
+    xhr.open("GET", `${window.location.href}api/gettopscore`);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = xhr.response.split(";");
+            var topUsername = response[0]; // Extract the username
+            var topScore = parseInt(response[1]); // Extract and parse the score
+
+            top_score.innerHTML = `${topUsername} has the top score (${topScore} score)`;
+
+            // Compare the current score with the top score
+            if (score > topScore && getCookieValue("usedgodmode") != "true") {
+                submitTopScore();
+            }
+        } else {
+            console.error("Error fetching top score:", xhr.statusText);
+        }
+    };
+    xhr.send();
+}
+
+function submitTopScore() {
+    var xhrPost = new XMLHttpRequest();
+    xhrPost.open("POST", `${window.location.href}api/settopscore`);
+    xhrPost.setRequestHeader("Content-Type", "application/json");
+    xhrPost.onload = function() {
+        if (xhrPost.status === 200) {
+            console.log("Top score updated successfully");
+        } else {
+            console.error("Error submitting top score:", xhrPost.statusText);
+        }
+    };
+    xhrPost.send(JSON.stringify({
+        uname: uname,
+        score: score
+    }));
+}
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function enableGodmode(){
+    document.cookie = `usedgodmode=true; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     godmode_div.hidden = false;
 }
 
@@ -84,11 +125,17 @@ function update(){
     current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)} (${numberWithCommas(sps * multiplier)} w/ Multiplier)`;
     extra_multiplier.innerHTML = `+1 Multiplier (${numberWithCommas(multiplier_cost)} score)`;
     extra_sps.innerHTML = `+1 Score / second (${numberWithCommas(sps_cost)} score)`;
-    nameplate.innerHTML = `${uname}'s clickerclicker`
+    nameplate.innerHTML = `${uname}'s clickerclicker`;
+    checkTopScore();
 }
 
 edit_name.onclick = function(){
-    uname = prompt("What's your new name", "Player");
+    tryuname = prompt("What's your new name", "Player");
+    if (tryuname.includes(";")){
+        alert("Invalid name");
+    } else {
+        uname = tryuname;
+    }
     update();
 }
 
@@ -137,6 +184,7 @@ full_reset.onclick = function(){
     multiplier = 1;
     sps = 0;
     uname = "Player";
+    document.cookie = `usedgodmode=false; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     godmode_div.hidden = true;
     update();
 };
@@ -172,7 +220,7 @@ disable_godmode.onclick = function(){
 if (hamter){
     extra_score.hidden = true;
     extra_score = document.createElement("img");
-    extra_score.src = "./img/hamter1.jpg";
+    extra_score.src = "./static/img/hamter1.jpg";
     extra_score.id = "score";
     extra_score.height = 225;
     extra_score.width = 225;
