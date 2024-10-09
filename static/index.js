@@ -45,7 +45,7 @@ function checkTopScore() {
             var topUsername = response[0]; // Extract the username
             var topScore = parseInt(response[1]); // Extract and parse the score
 
-            top_score.innerHTML = `${topUsername} has the top score (${topScore} score)`;
+            top_score.innerHTML = `${topUsername} has the top score (${numberWithCommas(topScore)} score)`;
 
             // Compare the current score with the top score
             if (score > topScore && getCookieValue("usedgodmode") != "true") {
