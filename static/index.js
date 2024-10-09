@@ -76,9 +76,10 @@ function update(){
     document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `uname=${uname}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
 
+    score.innerHTML = `+${multiplier} Score`
     current_score.innerHTML = `Score: ${numberWithCommas(score)}`;
     current_multiplier.innerHTML = `Multiplier: x${numberWithCommas(multiplier)}`;
-    current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)}`;
+    current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)} (${numberWithCommas(sps * multiplier)} w/ Multiplier7)`;
     extra_multiplier.innerHTML = `+1 Multiplier (${numberWithCommas(multiplier_cost)} score)`;
     extra_sps.innerHTML = `+1 Score / second (${numberWithCommas(sps_cost)} score)`;
     nameplate.innerHTML = `${uname}'s clickerclicker`
@@ -118,7 +119,6 @@ max_multiplier.onclick = function(){
         score -= multiplier_cost;
         multiplier += 1;
         update();
-        delay(100);
     }
 };
 
@@ -128,7 +128,6 @@ max_sps.onclick = function(){
         score -= sps_cost;
         sps += 1;
         update();
-        delay(100);
     }
 }
 
