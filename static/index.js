@@ -38,7 +38,7 @@ if (query.has("hamter")){
 }
 
 function checkTopScore() {
-    xhr.open("GET", `${window.location.href}api/gettopscore`);
+    xhr.open("GET", `http://${window.location.hostname}/api/gettopscore`);
     xhr.onload = function() {
         if (xhr.status === 200) {
             var response = xhr.response.split(";");
@@ -60,7 +60,7 @@ function checkTopScore() {
 
 function submitTopScore() {
     var xhrPost = new XMLHttpRequest();
-    xhrPost.open("POST", `${window.location.href}api/settopscore`);
+    xhrPost.open("POST", `http://${window.location.hostname}/api/settopscore`);
     xhrPost.setRequestHeader("Content-Type", "application/json");
     xhrPost.onload = function() {
         if (xhrPost.status === 200) {
