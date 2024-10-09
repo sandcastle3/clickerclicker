@@ -79,7 +79,7 @@ function update(){
     score.innerHTML = `+${multiplier} Score`
     current_score.innerHTML = `Score: ${numberWithCommas(score)}`;
     current_multiplier.innerHTML = `Multiplier: x${numberWithCommas(multiplier)}`;
-    current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)} (${numberWithCommas(sps * multiplier)} w/ Multiplier7)`;
+    current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)} (${numberWithCommas(sps * multiplier)} w/ Multiplier)`;
     extra_multiplier.innerHTML = `+1 Multiplier (${numberWithCommas(multiplier_cost)} score)`;
     extra_sps.innerHTML = `+1 Score / second (${numberWithCommas(sps_cost)} score)`;
     nameplate.innerHTML = `${uname}'s clickerclicker`
