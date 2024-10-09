@@ -26,6 +26,8 @@ let uname = getCookieValue("uname") || "Player";
 let godmodeBuffer = "";
 let query = new URLSearchParams(new URL(window.location.href).search);
 let hamter = false;
+let sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
+let multiplier_cost = 100 * multiplier;
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -68,15 +70,15 @@ function dosps(){
 }
 
 function update(){
-    const multiplier_cost = 100 * multiplier;
-    const sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
+    multiplier_cost = 100 * multiplier;
+    sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
 
     document.cookie = `score=${score}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `multiplier=${multiplier}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `sps=${sps}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
     document.cookie = `uname=${uname}; expires=Wed, 01 Jan 2030 00:00:00 UTC`;
 
-    score.innerHTML = `+${multiplier} Score`
+    extra_score.innerHTML = `+${multiplier} Score`;
     current_score.innerHTML = `Score: ${numberWithCommas(score)}`;
     current_multiplier.innerHTML = `Multiplier: x${numberWithCommas(multiplier)}`;
     current_sps.innerHTML = `Score / second: ${numberWithCommas(sps)} (${numberWithCommas(sps * multiplier)} w/ Multiplier)`;
@@ -105,7 +107,6 @@ extra_multiplier.onclick = function(){
 };
 
 extra_sps.onclick = function(){
-    const sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
     if (score >= sps_cost) {
         score -= sps_cost;
         sps += 1;
@@ -114,8 +115,8 @@ extra_sps.onclick = function(){
 };
 
 max_multiplier.onclick = function(){
-    const multiplier_cost = 100 * multiplier;
     while (score >= multiplier_cost) {
+        let multiplier_cost = 100 * multiplier;
         score -= multiplier_cost;
         multiplier += 1;
         update();
