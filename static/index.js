@@ -111,6 +111,7 @@ function dosps(){
 }
 
 function update(){
+    checkTopScore();
     multiplier_cost = 100 * multiplier;
     sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
 
@@ -126,7 +127,6 @@ function update(){
     extra_multiplier.innerHTML = `+1 Multiplier (${numberWithCommas(multiplier_cost)} score)`;
     extra_sps.innerHTML = `+1 Score / second (${numberWithCommas(sps_cost)} score)`;
     nameplate.innerHTML = `${uname}'s clickerclicker`;
-    checkTopScore();
 }
 
 edit_name.onclick = function(){

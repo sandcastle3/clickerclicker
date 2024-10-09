@@ -18,4 +18,8 @@ def gettopscore():
     with open("topscore.txt","r") as f:
         return f.read()
 
+@app.route("/favicon.ico")
+def favicon():
+    return redirect("./static/img/favicon.ico")
+
 app.run(host="0.0.0.0",port=80)
