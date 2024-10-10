@@ -4,8 +4,6 @@ const buttons = document.getElementById("buttons");
 let extra_score = document.getElementById("score");
 const extra_multiplier = document.getElementById("multiplier");
 const extra_sps = document.getElementById("sps");
-const max_multiplier = document.getElementById("max_multiplier");
-const max_sps = document.getElementById("max_sps");
 const edit_name = document.getElementById("edit_name")
 const current_score = document.getElementById("current_score");
 const current_multiplier = document.getElementById("current_multiplier");
@@ -160,24 +158,6 @@ extra_sps.onclick = function(){
         update();
     }
 };
-
-max_multiplier.onclick = function(){
-    while (score >= multiplier_cost) {
-        let multiplier_cost = 100 * multiplier;
-        score -= multiplier_cost;
-        multiplier += 1;
-        update();
-    }
-};
-
-max_sps.onclick = function(){
-    const sps_cost = (sps === 0) ? 50 : 50 * (sps + 1);
-    while (score >= sps_cost) {
-        score -= sps_cost;
-        sps += 1;
-        update();
-    }
-}
 
 full_reset.onclick = function(){
     score = 0;
